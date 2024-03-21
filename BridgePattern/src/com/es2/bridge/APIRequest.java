@@ -3,34 +3,35 @@ package com.es2.bridge;
 import java.util.HashMap;
 
 public class APIRequest {
-    protected java.util.HashMap<String,APIServiceInterface> services = new HashMap<>();
+    protected HashMap<String, APIServiceInterface> services = new HashMap<>();
     int count = 0;
-    public APIRequest() {}
-    public String addService(APIServiceInterface service)
-    {
-        String serviceID = "Service ID " + count;
+
+    public APIRequest(){ }
+
+    public String addService(APIServiceInterface service){
+        String serviceID = "service ID " + count;
         this.services.put(serviceID, service);
-        count ++;
+        count++;
         return serviceID;
     }
-    public java.lang.String getContent(java.lang.String serviceId, java.lang.String contentId) throws ServiceNotFoundException
-    {
-        APIServiceInterface api = services.get(serviceId);
-        if (api == null)
-        {
+
+    public String getContent(String serviceId, String contentId) throws ServiceNotFoundException{
+        APIServiceInterface service = services.get(serviceId);
+
+        if(service == null){
             throw new ServiceNotFoundException();
         }
-        return api.getContent(contentId);
 
+        return service.getContent(contentId);
     }
-    public java.lang.String setContent(java.lang.String serviceId, java.lang.String content) throws ServiceNotFoundException
-    {
-        APIServiceInterface api = services.get(serviceId);
-        if (api == null)
-        {
+
+    public String setContent(String serviceId, String content) throws ServiceNotFoundException {
+        APIServiceInterface service = services.get(serviceId);
+
+        if(service == null){
             throw new ServiceNotFoundException();
         }
-        return api.setContent(content);
 
+        return service.setContent(content);
     }
 }

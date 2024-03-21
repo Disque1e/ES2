@@ -1,33 +1,33 @@
 package com.es2.bridge;
 
 import java.util.Map;
+import java.util.LinkedHashMap;
 
 public class APIMoodle extends Object implements APIServiceInterface{
+    protected LinkedHashMap<String, String> content = new LinkedHashMap<>();
     int count = 0;
-    protected Map<String, String> content;
 
-    public APIMoodle(){}
+    public APIMoodle() { }
 
     public String getContent(String contentId){
-        if(!contentId.equals("0"))
-        {
-            return this.content.get(contentId);
+        String result = "";
+
+        if(!contentId.equals("0")){
+            return content.get(contentId);
         }
-        String res = "";
-        for(Map.Entry<String,String> entry : this.content.entrySet())
-        {
-            res = res.concat(entry.getValue());
+
+        for(Map.Entry<String, String> entry: content.entrySet()){
+            result = result.concat(entry.getValue());
         }
-        return res;
+
+        return result;
     }
 
-    public String setContent(String content)
-    {
-        // Generate a unique ID for the new content
-        String contentId = String.valueOf(this.content.size() + 1);
-        // Store the content with its generated ID
-        this.content.put(contentId, content);
-        // Return the ID of the stored content
-        return contentId;
+    public String setContent(String content){
+        String contentID = "content ID " + count;
+        this.content.put(contentID, content);
+        count++;
+        return contentID;
     }
+
 }

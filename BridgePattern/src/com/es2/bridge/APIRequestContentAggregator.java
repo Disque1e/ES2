@@ -2,14 +2,13 @@ package com.es2.bridge;
 
 public class APIRequestContentAggregator extends APIRequest {
     public APIRequestContentAggregator (){}
-    public java.lang.String getContent(java.lang.String serviceId, java.lang.String contentId) throws ServiceNotFoundException
-    {
-        APIServiceInterface api = services.get(serviceId);
-        if (api == null)
-        {
+    public String getContent(String serviceId, String contentId) throws ServiceNotFoundException{
+        APIServiceInterface content = services.get(serviceId);
+
+        if(content == null){
             throw new ServiceNotFoundException();
         }
-        return api.getContent(contentId);
 
+        return content.getContent(contentId);
     }
 }
